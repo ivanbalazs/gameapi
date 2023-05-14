@@ -1,6 +1,6 @@
 import { TicTacToe } from './tictactoe';
 
-let game;
+let game: TicTacToe;
 
 describe('TicTacToe', () => {
   beforeEach(() => {
@@ -9,12 +9,12 @@ describe('TicTacToe', () => {
 
   test('initial setup of playfield', () => {
     expect(game.state.state).toBe('TURN');
-    expect(game.state.player).toBe(0);
+    expect(game.state.player).toBe(1);
   });
 
   test('bad place throws error', () => {
     expect(() => {
-      game.turn('a');
+      game.turn('a' as any);
     }).toThrow('Wrong place: a');
   });
 
@@ -22,18 +22,18 @@ describe('TicTacToe', () => {
     game.turn(0);
     expect(() => {
       game.turn(0);
-    }).toThrow('Place already used');
+    }).toThrow('Place already taken');
   });
 
   test('take turn', () => {
     game.turn(0);
-    expect(game.state.player).toBe(1);
+    expect(game.state.player).toBe(2);
   });
 
   test('take 2 turns', () => {
     game.turn(0);
     game.turn(1);
-    expect(game.state.player).toBe(0);
+    expect(game.state.player).toBe(1);
   });
 
   test('player 1 wins', () => {
@@ -43,7 +43,7 @@ describe('TicTacToe', () => {
     game.turn(4);
     game.turn(2);
     expect(game.state.state).toBe('WON');
-    expect(game.state.player).toBe(0);
+    expect(game.state.player).toBe(1);
   });
 
   test('player 2 wins', () => {
@@ -54,7 +54,7 @@ describe('TicTacToe', () => {
     game.turn(8);
     game.turn(5);
     expect(game.state.state).toBe('WON');
-    expect(game.state.player).toBe(1);
+    expect(game.state.player).toBe(2);
   });
 
   test('cannot take turn after winning', () => {
@@ -79,6 +79,6 @@ describe('TicTacToe', () => {
     game.turn(8);
     game.turn(5);
     expect(game.state.state).toBe('OVER');
-    expect(game.state.player).toBe(0);
+    expect(game.state.player).toBe(1);
   });
 });
