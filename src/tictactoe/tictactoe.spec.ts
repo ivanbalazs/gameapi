@@ -8,7 +8,7 @@ describe('TicTacToe', () => {
   });
 
   test('initial setup of playfield', () => {
-    expect(game.state.state).toBe('TURN');
+    expect(game.state.state).toBe('turn');
     expect(game.state.player).toBe(1);
   });
 
@@ -42,7 +42,7 @@ describe('TicTacToe', () => {
     game.turn(1);
     game.turn(4);
     game.turn(2);
-    expect(game.state.state).toBe('WON');
+    expect(game.state.state).toBe('won');
     expect(game.state.player).toBe(1);
   });
 
@@ -53,7 +53,7 @@ describe('TicTacToe', () => {
     game.turn(4);
     game.turn(8);
     game.turn(5);
-    expect(game.state.state).toBe('WON');
+    expect(game.state.state).toBe('won');
     expect(game.state.player).toBe(2);
   });
 
@@ -78,7 +78,7 @@ describe('TicTacToe', () => {
     game.turn(7);
     game.turn(8);
     game.turn(5);
-    expect(game.state.state).toBe('OVER');
+    expect(game.state.state).toBe('over');
     expect(game.state.player).toBe(1);
   });
 });

@@ -1,43 +1,44 @@
+import { Base } from '../base';
+
 export enum GameState {
-  turn = 'TURN',
-  over = 'OVER',
-  won = 'WON',
+  TURN = 'turn',
+  OVER = 'over',
+  WON = 'won',
 }
 
-export type Players = 1 | 2;
+export class TicTacToe extends Base {
+  #gameState = GameState.TURN;
+  #field: (number | null)[] = new Array(9).fill(null);
 
-export type FieldPlaces = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-
-export class TicTacToe {
-  #gameState = GameState.turn;
-  #currentPlayer: Players = 1;
-  #field: (FieldPlaces | null)[] = new Array(9).fill(null);
+  constructor() {
+    super({ minPlayers: 2, maxPlayers: 2 });
+  }
 
   get state() {
     return {
       state: this.#gameState,
-      player: this.#currentPlayer,
+      player: this.currentPlayer,
       field: this.#field,
     };
   }
 
-  turn(_place: FieldPlaces) {
-    const place = Math.floor(_place);
+  turn(_place: number) {
+    const place = Math.floor(+_place);
     if (isNaN(place) || place < 0 || place > 8) {
       throw new Error(`Wrong place: ${_place}`);
     }
     if (this.#field[place] !== null) {
       throw new Error('Place already taken');
     }
-    if (this.#gameState !== GameState.turn) {
+    if (this.#gameState !== GameState.TURN) {
       throw new Error('Cannot turn, match is over');
     }
-    this.#field[place] = this.#currentPlayer;
+    this.#field[place] = this.currentPlayer;
     const won = this.#hasWinner();
     const ended = !this.#hasTurnLeft();
-    this.#gameState = won ? GameState.won : ended ? GameState.over : GameState.turn;
+    this.#gameState = won ? GameState.WON : ended ? GameState.OVER : GameState.TURN;
     if (!won && !ended) {
-      this.#switchPlayer();
+      this.nextPlayer();
     }
     return this.state;
   }
@@ -61,9 +62,5 @@ export class TicTacToe {
       const f = this.#field;
       return f[a] && f[b] && f[c] && f[a] === f[b] && f[b] === f[c];
     });
-  }
-
-  #switchPlayer() {
-    this.#currentPlayer = this.#currentPlayer === 1 ? 2 : 1;
   }
 }
