@@ -95,10 +95,6 @@ describe('Minesweeper', () => {
 
 function generateGame(fieldSize: number, mines: number[]) {
   const game = new Minesweeper({ fieldSize, mineCnt: mines.length });
-  game.fields = generateField({ fieldSize, mines });
+  game.fields = new Array(Math.pow(fieldSize, 2)).fill(null).map((_, index) => new Field({ fieldSize, index, hasMine: mines.includes(index) }));
   return game;
-}
-
-function generateField({ fieldSize, mines }: { fieldSize: number; mines: number[] }) {
-  return new Array(Math.pow(fieldSize, 2)).fill(null).map((_, index) => new Field({ fieldSize, index, hasMine: mines.includes(index) }));
 }
