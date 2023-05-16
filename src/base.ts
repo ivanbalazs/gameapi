@@ -4,11 +4,11 @@ interface BaseProps {
 }
 
 export abstract class Base {
-  minPlayers = 1;
-  maxPlayers = 1;
+  minPlayers: number;
+  maxPlayers: number;
   currentPlayer = 1;
 
-  constructor({ minPlayers, maxPlayers }: BaseProps) {
+  constructor({ minPlayers, maxPlayers }: BaseProps = { minPlayers: 1, maxPlayers: 1 }) {
     this.minPlayers = minPlayers;
     this.maxPlayers = maxPlayers;
   }
