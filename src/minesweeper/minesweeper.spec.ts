@@ -91,6 +91,27 @@ describe('Minesweeper', () => {
     toggleFieldFlag(0, State.STEP);
     toggleFieldFlag(4, State.WON);
   });
+
+  test('stepCount works properly', () => {
+    const game = generateGame(3, [0, 2, 4, 6, 8]);
+    expect(game.state.stepCount).toBe(0);
+    game.check(game.state.fields[1]);
+    game.check(game.state.fields[3]);
+    game.check(game.state.fields[5]);
+    game.toggleFlag(game.state.fields[4]);
+    game.toggleFlag(game.state.fields[4]);
+    expect(game.state.stepCount).toBe(5);
+  });
+
+  test('flagCount works properly', () => {
+    const game = generateGame(2, [0]);
+    expect(game.state.flagCount).toBe(0);
+    game.toggleFlag(game.state.fields[0]);
+    game.toggleFlag(game.state.fields[1]);
+    game.toggleFlag(game.state.fields[2]);
+    game.toggleFlag(game.state.fields[0]);
+    expect(game.state.flagCount).toBe(2);
+  });
 });
 
 function generateGame(fieldSize: number, mines: number[]) {

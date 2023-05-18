@@ -23,6 +23,8 @@ export class Minesweeper extends Base {
   #mineCnt: number;
   #fields: Field[] = [];
   #state = State.STEP;
+  #stepCount = 0;
+  #flagCount = 0;
 
   constructor({ fieldSize, mineCnt }: ConstructorProps) {
     if (isNaN(+fieldSize) || fieldSize < 1) {
@@ -41,6 +43,8 @@ export class Minesweeper extends Base {
     return {
       fields: this.#fields,
       state: this.#state,
+      stepCount: this.#stepCount,
+      flagCount: this.#flagCount,
     };
   }
 
@@ -70,6 +74,8 @@ export class Minesweeper extends Base {
 
   toggleFlag(field: Field) {
     field.isFlagged = !field.isFlagged;
+    this.#stepCount++;
+    this.#flagCount = this.#flagCount + (field.isFlagged ? 1 : -1);
     if (this.#isComplete) {
       this.#state = State.WON;
     }
@@ -77,6 +83,7 @@ export class Minesweeper extends Base {
   }
 
   check(field: Field) {
+    this.#stepCount++;
     if (field.hasMine) {
       this.#state = State.FAIL;
       this.#revealMines();
