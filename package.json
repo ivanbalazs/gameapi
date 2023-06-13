@@ -2,7 +2,10 @@
   "name": "gameapi",
   "version": "0.1.0",
   "description": "Game, boardgame APIs",
-  "main": "index.js",
+  "files": [
+    "/dist"
+  ],
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git@private.github.com:ivanbalazs/gameapi.git"
@@ -19,7 +22,8 @@
   "license": "ISC",
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "prepublishOnly": "tsc"
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",

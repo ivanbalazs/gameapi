@@ -1,4 +1,4 @@
-import { Minesweeper, State } from './minesweeper';
+import { Minesweeper, State } from './';
 import Field from './field';
 
 describe('Minesweeper', () => {
