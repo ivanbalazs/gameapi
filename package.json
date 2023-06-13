@@ -1,4 +1,22 @@
 {
+  "name": "gameapi",
+  "version": "0.1.0",
+  "description": "Game, boardgame APIs",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@private.github.com:ivanbalazs/gameapi.git"
+  },
+  "keywords": [
+    "boardgame",
+    "game",
+    "api",
+    "tabletop",
+    "multiplayer",
+    "player"
+  ],
+  "author": "Balazs Ivan",
+  "license": "ISC",
   "scripts": {
     "build": "tsc",
     "test": "jest"
