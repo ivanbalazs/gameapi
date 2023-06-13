@@ -1,5 +1,5 @@
 {
-  "name": "gameapi",
+  "name": "@ivanbalazs/gameapi",
   "version": "0.1.0",
   "description": "Game, boardgame APIs",
   "files": [
@@ -8,7 +8,7 @@
   "main": "dist/index.js",
   "repository": {
     "type": "git",
-    "url": "git@private.github.com:ivanbalazs/gameapi.git"
+    "url": "git@github.com:ivanbalazs/gameapi.git"
   },
   "keywords": [
     "boardgame",
